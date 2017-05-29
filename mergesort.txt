@@ -1,0 +1,57 @@
+#include <cstdio>
+#include <cstring>
+#include <cmath>
+#include <climits>
+#include <queue>
+#include <set>
+#include <map>
+#include <string>
+#include <vector>
+#include <iostream>
+#include <algorithm>
+#define LL long long
+#define cl(a, b) memset(a, b, sizeof a)
+#define debug puts("Infinity is awsome!")
+using namespace std;
+const int maxn=1005;
+int temp[maxn];
+void merge(int t[],int first,int last){
+    int mid=(first+last)/2;
+    int j=first, k=mid+1;
+    for(int i=first;i<=last;i++)
+    if(k>last)
+        temp[i]=t[j++];
+    else if(j>mid)
+        temp[i]=t[k++];
+    else if(t[j]<t[k])
+        temp[i]=t[j++];
+    else
+        temp[i]=t[k++];
+    for(int i=first;i<=last;i++)
+        t[i]=temp[i];
+}
+void mergesort(int t[],int first,int last){
+    if(first==last) return;
+    int mid=(first+last)/2;
+    mergesort(t, first, mid);
+    mergesort(t, mid+1, last);
+    merge(t, first, last);
+}
+int main(){
+    int T;
+    int cas=0;
+
+    int a[10]={1,3,2,4,6,5,8,7,10,9};
+
+    mergesort(a, 0, 9);
+    for(int i=0;i<10;i++)
+        printf("%d ",a[i]);
+
+
+
+
+    return 0;
+}
+
+
+
